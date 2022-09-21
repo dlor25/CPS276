@@ -12,24 +12,25 @@
 
     <!-- Example Code -->
     
-    <form class="row g-3" method="post" action="#">
     <div class="container">
+    <form class="row g-3" method="post" action="#">
+    <div class="col-md-6">
       <label for="inputfirstname" class="form-label">First Name</label>
         <input type="name" class="form-control" id="inputfirstname">
       </div>
-      <div class="container">
+      <div class="col-md-6">
         <label for="inputlastname" class="form-label">Last Name</label>
         <input type="name" class="form-control" id="inputlastname">
       </div> 
-      <div class="container">
+      <div class="col-12">
         <label for="inputAddress" class="form-label">Address</label>
         <input type="text" class="form-control" id="inputAddress">
       </div>
-      <div class="container">
+      <div class="col-md-6">
         <label for="inputCity" class="form-label">City</label>
         <input type="text" class="form-control" id="inputCity">
       </div>
-      <div class="container">
+      <div class="col-md-4">
         <label for="inputState" class="form-label">State</label>
         <select id="inputState" class="form-select">
         <option>Alabama</option>
@@ -39,18 +40,19 @@
         <option>Vermont</option>
         </select>
       </div>
-      <div class="container">
+      <div class="col-md-2">
         <label for="inputZip" class="form-label">Zip</label>
         <input type="text" class="form-control" id="inputZip">
       </div>
-      <div class="container">
+      <div class="col-12">
         <label><input type="radio" name="gender" value="male" > Male </label>
         <label><input type="radio" name="gender" value="female" > Female </label>
       </div>
-      <div class="container">
+      <div class="col-12">
         <button type="submit" class="btn btn-primary">Register</button>
       </div>
     </form>
+    </div>
     
     <!-- End Example Code -->
   </body>
