@@ -21,4 +21,18 @@ $table .= "</table>";
 
 ?>
 
-<? echo "$table" ?>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intital-scale=1.0">
+    <title>Calculator</title>
+  </head>
+        <body>
+            <p>
+            <? echo "$table" ?>
+            </p>
+        </body>
+
+
+</html>

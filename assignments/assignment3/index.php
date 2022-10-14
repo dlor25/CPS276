@@ -15,7 +15,6 @@ echo $Calculator->calc(10);          //will output You must enter a string and t
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="Firefox">
     <meta name="viewport" content="width=device-width, intital-scale=1.0">
     <title>Calculator</title>
   </head>
