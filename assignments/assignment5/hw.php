@@ -19,7 +19,7 @@ if(count($_POST) > 0){
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	    <link rel="stylesheet" href="public/css/main.css">
+
         <title>Directory</title>
 
         <style>
