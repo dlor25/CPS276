@@ -1,7 +1,7 @@
 <?php
 require_once 'Crud.php';
 $crud = new Crud();
-$output = $crud->getA6('list');
+$output = $crud->getA7('list');
 ?>
 
 

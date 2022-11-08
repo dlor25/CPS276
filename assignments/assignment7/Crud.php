@@ -3,10 +3,10 @@ require_once 'Pdo_methods.php';
 
 class Crud {
 
-    public function getA6($type){
+    public function getA7($type){
         $pdo = new PdoMethods();
         
-        $sql = "SELECT * FROM a6";
+        $sql = "SELECT * FROM a7";
 
         $records = $pdo->selectNotBinded($sql);
 
@@ -20,7 +20,7 @@ class Crud {
 				if($type == 'input'){return $this->createInput($records);}	
             }
             else {
-                return 'No a6 found';
+                return 'No a7 found';
             }
         }
     }
@@ -34,7 +34,7 @@ class Crud {
         $path = $_FILES['myfile']['full_path'];
 
 		/* HERE I CREATE THE SQL STATEMENT I AM BINDING THE PARAMETERS */
-		$sql = "INSERT INTO a6 (file_path, file_name) VALUES ('$path', :filename)";
+		$sql = "INSERT INTO a7 (file_path, file_name) VALUES ('$path', :filename)";
 
 			 
 	    /* THESE BINDINGS ARE LATER INJECTED INTO THE SQL STATEMENT THIS PREVENTS AGAIN SQL INJECTIONS */
