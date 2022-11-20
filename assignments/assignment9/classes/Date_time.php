@@ -8,15 +8,18 @@ class Date_time{
         if(isset($_POST['addnote'])){
             
             $pdo = new PdoMethods();
+
+            $time = $_POST['dateTime'];
+            $note = $_POST['note'];
     
             /* HERE I CREATE THE SQL STATEMENT I AM BINDING THE PARAMETERS */
-            $sql = "INSERT INTO a9 (timestr, note) VALUES (':time', ':note')";
+            $sql = "INSERT INTO a9 (timestr, note) VALUES (strtotime('$time'), '$note')";
     
                  
             /* THESE BINDINGS ARE LATER INJECTED INTO THE SQL STATEMENT THIS PREVENTS AGAIN SQL INJECTIONS */
             $bindings = [
-                [':time',$_POST['dateTime'],'str'],
-                [':note',$_POST['note'],'str']
+                ['$time', $_POST['dateTime'],'str'],
+                ['$note', $_POST['note'],'str']
             ];
     
             /* I AM CALLING THE OTHERBINDED METHOD FROM MY PDO CLASS */
