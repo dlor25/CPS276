@@ -3,4 +3,4 @@ CREATE TABLE a9 (
   timestr varchar(255) NOT NULL,
   note varchar(255) NOT NULL,
   PRIMARY KEY (a9_id)
-) ENGINE=InnoDB;
+);

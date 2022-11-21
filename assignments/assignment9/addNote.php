@@ -24,7 +24,7 @@ $notes = $dt->checkSubmit();
         
         <form method="post">
 
-            <p><?php //echo $notes; ?></p>
+            <p><?php echo $notes; ?></p>
 
             <div class="form-group">
                 <label for="dateTime">Date and Time</label>
