@@ -69,7 +69,7 @@ class Date_time{
                     return $notes;
                 }
                 else {
-                    $notes = 'No notes found';
+                    $notes = 'No notes found for the date range selected';
 
                     return $notes;
                 }
