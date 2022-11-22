@@ -93,7 +93,7 @@ class Date_time{
                 $cdt = $row['timestr'];
 
                 // mm/dd/yyyy HH:MM AM/PM
-                $notes .= date("n/d/Y H:ia",$cdt);
+                $notes .= date("n/d/Y h:ia",$cdt);
 
                 $notes .= "</td>";
 
