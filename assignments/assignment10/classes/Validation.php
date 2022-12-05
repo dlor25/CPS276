@@ -32,7 +32,7 @@ class Validation{
     }
 
     private function phone($value){
-        $match = preg_match('/\d{3}\.\d{3}\.\d{4}/', $value);
+        $match = preg_match('/\d{3}(\.|\-|\))\d{3}(\.|\-)\d{4}$/', $value);
         return $this->setError($match);
     }
 
@@ -42,7 +42,7 @@ class Validation{
     }
 
 	private function dob($value){
-        $match = preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $value);
+        $match = preg_match('/^(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)[0-9]{2}$/', $value);
         return $this->setError($match);
     }
 	

@@ -1,6 +1,6 @@
 <?php
 
-$path = "index.php?page=welcome";
+$path = "index.php?page=login";
 $cwd = "/home/d/l/dlor/public_html/CPS276/assignments/assignment10/";
 
 
@@ -41,6 +41,11 @@ if(isset($_GET)){
 
     else if($_GET['page'] === "logout"){
         require_once($cwd.'logout.php');
+        $result = init();
+    }
+
+    else if($_GET['page'] === "login"){
+        require_once($cwd.'pages/login.php');
         $result = init();
     }
 

@@ -58,7 +58,7 @@ $elementsArr = [
     "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one financial option</span>",
     "errorOutput"=>"",
     "type"=>"password",
-    "value"=>"*******",
+    "value"=>"password",
     "action"=>"required",
     "regex"=>"password"
   ],
@@ -80,12 +80,14 @@ function addData($post){
 
       $pdo = new PdoMethods();
 
-      $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :password, :status)";
+      $hpw = password_hash($post['password'],PASSWORD_DEFAULT);
+
+      $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
 
       $bindings = [
         [':name',$post['name'],'str'],
         [':email',$post['email'],'str'],
-        [':password',$post['password'],'str'],
+        [':hpw',$hpw,'str'],
         [':status',$post['status'],'str'],
         ];
 
@@ -123,7 +125,7 @@ $form = <<<HTML
     </div>
     <div class="form-group">
       <label for="password">Password {$elementsArr['email']['errorOutput']}</label>
-      <input type="text" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}" >
+      <input type="password" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}" >
     </div>  
     <div class="form-group">
       <label for="state">Status</label>
@@ -141,5 +143,7 @@ HTML;
 return [$acknowledgement, $form];
 
 }
+
+
 
 ?>

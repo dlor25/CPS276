@@ -1,6 +1,5 @@
 <?php
   
-function init(){
 
   $output = "";
   
@@ -18,7 +17,8 @@ function init(){
     
       /** IF THERE WAS AN RETURN ERROR STRING */
       if($records == 'error'){
-        echo "There was an error logging it";
+        $msg = "There was an error logging it";
+        return $msg;
       }
     
       /** */
@@ -29,10 +29,9 @@ function init(){
 
             session_start();
             $_SESSION['access'] = "accessGranted";
+            $msg = "success";
 
             header('https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
-
-            $msg = "success";
 
             return $msg;
           }
@@ -40,7 +39,7 @@ function init(){
           else {
                   
             $msg = "There was a problem logging in with those credentials";
-
+                
             return $msg;
           }
         }
@@ -53,20 +52,22 @@ function init(){
       }
   }
 
-  else {
-    header('https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login');
-  }
-}
-
   // else{
   //   return;
   // }
 
-  $msg = '';
-
-  function getLoginForm(){
+  // function getLoginForm(){
   
-  $output = <<<HTML
+?>
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>PHP Form Validation Example</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+    </head>
   
     <body class="container">
   
@@ -74,7 +75,7 @@ function init(){
   
       <p>Email is "dlor@admin.com" password is "password"</p>
 
-      <form action="index.php?page=login.php" method="post">
+      <form action="test.php" method="post">
 
       <div class="form-group">
         <label>Email: <input type="text" name="email" class="form-control" value="dlor@admin.com"></label>
@@ -90,8 +91,4 @@ function init(){
 
       </form> 
     </body>
-  HTML;
-
-  return [$msg, $output];
-
-  }
+  </html> 
