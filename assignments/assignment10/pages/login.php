@@ -1,10 +1,8 @@
 <?php
 
-require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
-
 function init(){
 
-  if(isset($_POST['login'])){
+  if(isset($_POST['sumbit'])){
 
     return login($_POST);
   }
@@ -37,7 +35,7 @@ function init(){
       </div>
       
       <div class="from-group">
-        <input type="submit" name="login" value="Login" class="btn btn-primary">
+        <input type="submit" name="sumbit" value="Login" class="btn btn-primary">
       </div>
 
       </form> 
@@ -51,7 +49,9 @@ function init(){
 
 
   function login($post){
-         
+  
+  require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
+  
   $pdo = new PdoMethods();
   $sql = "SELECT email, password FROM admins WHERE email = :email";
   $bindings = array(
