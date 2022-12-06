@@ -1,8 +1,5 @@
 <?php
   
-
-  $output = "";
-  
   if(isset($_POST['login'])){
 
     require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
@@ -29,9 +26,7 @@
             session_start();
             $_SESSION['access'] = "accessGranted";
 
-            header('https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
-
-            echo "success";
+            header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
           }
 
           else {

@@ -1,72 +1,24 @@
 <?php
-  
+
+require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
+
 function init(){
 
-  $output = "";
-  
   if(isset($_POST['login'])){
 
-    require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
-         
-      $pdo = new PdoMethods();
-      $sql = "SELECT email, password FROM admins WHERE email = :email";
-      $bindings = array(
-      array(':email', $_POST['email'], 'str')
-      );
-    
-      $records = $pdo->selectBinded($sql, $bindings);
-    
-      /** IF THERE WAS AN RETURN ERROR STRING */
-      if($records == 'error'){
-        echo "There was an error logging it";
-      }
-    
-      /** */
-      else{
-        if(count($records) != 0){
-          /** IF THE PASSWORD IS NOT VERIFIED USING PASSWORD_VERIFY THEN RETURN FAILED, OTHERWISE RETURN SUCCESS, IF NO RECORDS ARE FOUND RETURN NO RECORDS FOUND. */
-          if(password_verify($_POST['password'], $records[0]['password'])){
-
-            session_start();
-            $_SESSION['access'] = "accessGranted";
-
-            header('https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
-
-            $msg = "success";
-
-            return $msg;
-          }
-
-          else {
-                  
-            $msg = "There was a problem logging in with those credentials";
-
-            return $msg;
-          }
-        }
-        else {
-
-          $msg = "There was a problem logging in with those credentials";
-
-          return $msg;
-        }
-      }
+    return login($_POST);
   }
-
+  
   else {
-    header('https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login');
+    $msg = "";
+    return getLoginForm($msg);
   }
 }
 
-  // else{
-  //   return;
-  // }
 
-  $msg = '';
-
-  function getLoginForm(){
+  function getLoginForm($error){
   
-  $output = <<<HTML
+   $output = <<<HTML
   
     <body class="container">
   
@@ -92,6 +44,58 @@ function init(){
     </body>
   HTML;
 
-  return [$msg, $output];
+  return [$error, $output];
 
+  }
+
+
+
+  function login($post){
+         
+  $pdo = new PdoMethods();
+  $sql = "SELECT email, password FROM admins WHERE email = :email";
+  $bindings = array(
+  array(':email', $post['email'], 'str')
+  );
+
+  $records = $pdo->selectBinded($sql, $bindings);
+
+  /** IF THERE WAS AN RETURN ERROR STRING */
+  if($records == 'error'){
+    $msg = "There was an error logging it";
+    return getLoginForm($msg);
+  }
+
+  /** */
+  else{
+    if(count($records) != 0){
+      /** IF THE PASSWORD IS NOT VERIFIED USING PASSWORD_VERIFY THEN RETURN FAILED, OTHERWISE RETURN SUCCESS, IF NO RECORDS ARE FOUND RETURN NO RECORDS FOUND. */
+      if(password_verify($post['password'], $records[0]['password'])){
+
+        session_start();
+        $_SESSION['access'] = "accessGranted";
+
+        $msg = header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
+
+        return $msg;
+      }
+
+      else {
+              
+        $msg = "There was a problem logging in with those credentials";
+
+        return getLoginForm($msg);
+      }
+    }
+    else {
+
+      $msg = "There was a problem logging in with those credentials";
+
+      return getLoginForm($msg);
+    }
+  }
+
+  $msg = "Error";
+
+  return getLoginForm($msg);
   }

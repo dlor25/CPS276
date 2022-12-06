@@ -23,7 +23,9 @@ require_once('pages/routes.php');
 			echo $result[0]; 
 
 			/* THE FORM GOES HERE.  LOOK AT THE FORM.PHP PAGE TO SEE HOW THE RETURN IN DONE. */
-			echo $result[1]; 
+			echo $result[1];
+
+			// print_r(init());
 		?>
 	</body>
 </html> 
