@@ -24,7 +24,7 @@ function init(){
   
       <p>Email is "dlor@admin.com" password is "password"</p>
 
-      <form action="index.php?page=login.php" method="post">
+      <form action="index.php?page=login" method="post">
 
       <div class="form-group">
         <label>Email: <input type="text" name="email" class="form-control" value="dlor@admin.com"></label>
