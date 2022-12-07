@@ -76,7 +76,7 @@ $elementsArr = [
 	],
   "state"=>[
     "type"=>"select",
-    "options"=>["MI"=>"Michigan","OH"=>"Ohio","PA"=>"Pennslyvania","TX"=>"Texas"],
+    "options"=>["CA"=>"California","MI"=>"Michigan","OH"=>"Ohio","PA"=>"Pennslyvania","TX"=>"Texas"],
 		"selected"=>"MI",
 		"regex"=>"name"
 	],

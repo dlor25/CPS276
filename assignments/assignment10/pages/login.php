@@ -20,17 +20,22 @@ function init(){
   
       <h1>Login</h1>
   
-      <p>Email is "dlor@admin.com" password is "password"</p>
+      <!-- <p>Email is "dlor@admin.com" password is "password"</p> -->
+      <!-- Staff email is "dlor@staff.com" password is "password"
+           Test email is "test@test.com password is "test"     
+      -->
 
       <form action="index.php?page=login" method="post">
 
       <div class="form-group">
-        <label>Email: <input type="text" name="email" class="form-control" value="dlor@admin.com"></label>
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" name="email" value="dlor@admin.com">
       </div>
 
-      <div class="from-group">
-        <label>Password: <input type="password" name="password" class="form-control" value="password"></label>
-      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" value="password">
+      </div>  
       
       <div class="from-group">
         <input type="submit" name="login" value="Login" class="btn btn-primary">
@@ -81,20 +86,20 @@ function init(){
 
       else {
               
-        $msg = "There was a problem logging in with those credentials";
+        $msg = "Login credentials incorrect";
 
         return getLoginForm($msg);
       }
     }
     else {
 
-      $msg = "There was a problem logging in with those credentials";
+      $msg = "Login credentials incorrect";
 
       return getLoginForm($msg);
     }
   }
 
-  $msg = "Error";
+  $msg = "Login credentials incorrect";
 
   return getLoginForm($msg);
   }

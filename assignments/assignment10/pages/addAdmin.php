@@ -95,24 +95,35 @@ function addData($post){
 
       $hpw = password_hash($post['password'],PASSWORD_DEFAULT);
 
-      $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
+      $sql = "SELECT email FROM admins WHERE email = :email";
+      $bindings = array(
+      array(':email', $post['email'], 'str')
+      );
 
-      $bindings = [
-        [':name',$post['name'],'str'],
-        [':email',$post['email'],'str'],
-        [':hpw',$hpw,'str'],
-        [':status',$post['status'],'str'],
-        ];
+      $records = $pdo->selectBinded($sql, $bindings);
 
-      $result = $pdo->otherBinded($sql, $bindings);
+      if($post['email'] != $records[0]['email']){
+        $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
 
-      if($result == "error"){
-        return getForm("<p>There was a problem processing your form</p>", $elementsArr);
+        $bindings = [
+          [':name',$post['name'],'str'],
+          [':email',$post['email'],'str'],
+          [':hpw',$hpw,'str'],
+          [':status',$post['status'],'str'],
+          ];
+
+        $result = $pdo->otherBinded($sql, $bindings);
+
+        if($result == "error"){
+          return getForm("<p>There was a problem processing your form</p>", $elementsArr);
+        }
+        else {
+          return getForm("<p>Admin has been added</p>", $elementsArr);
+        }
       }
-      else {
-        return getForm("<p>Admin has been added</p>", $elementsArr);
+      else{
+        return getForm("<p>That email already exists</p>", $elementsArr);
       }
-      
 }
    
 
@@ -157,6 +168,6 @@ return [$acknowledgement, $form];
 
 }
 
-
+// Can't be the same email
 
 ?>
