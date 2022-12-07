@@ -34,9 +34,12 @@ HTML;
 function security(){
     global $nav, $adminNav, $staffNav;
     session_start();
-    if($_SESSION['accessGranted'] == "granted"){
+    if($_SESSION['access'] == "accessGranted"){
         if ($_SESSION['status'] == "admin"){ 
             $nav = $adminNav;
+        }
+        elseif ($_SESSION['status'] == "staff"){ 
+            $nav = $staffNav;
         }
     }
     else {

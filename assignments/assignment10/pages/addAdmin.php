@@ -1,5 +1,18 @@
 <?php
 
+session_start();
+if($_SESSION['access'] == "accessGranted"){
+    if ($_SESSION['status'] == "admin"){ 
+        $nav = $adminNav;
+    }
+    elseif ($_SESSION['status'] == "staff"){ 
+      header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+    }
+}
+else {
+    header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+}
+
 /* HERE I REQUIRE AND USE THE STICKYFORM CLASS THAT DOES ALL THE VALIDATION AND CREATES THE STICKY FORM.  THE STICKY FORM CLASS USES THE VALIDATION CLASS TO DO THE VALIDATION WORK.*/
 require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/StickyForm.php');
 $stickyForm = new StickyForm();

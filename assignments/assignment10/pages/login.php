@@ -18,8 +18,6 @@ function init(){
   
    $output = <<<HTML
   
-    <body class="container">
-  
       <h1>Login</h1>
   
       <p>Email is "dlor@admin.com" password is "password"</p>
@@ -39,7 +37,6 @@ function init(){
       </div>
 
       </form> 
-    </body>
   HTML;
 
   return [$error, $output];

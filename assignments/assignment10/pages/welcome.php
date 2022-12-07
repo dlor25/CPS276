@@ -1,15 +1,19 @@
 <?php
 
-
-session_start();
-if($_SESSION['access'] !== "accessGranted"){
-  header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login');
-}
+require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/pages/routes.php');
+$sec = security();
 
 
 
 function init(){
-    return ["<h1>Welcome</h1>","<p>Welcome the stick form mod application.  Click one of the lines above</p>"];
+
+    $msg = "<h1>Welcome</h1>";
+
+    $msg .= "<p>Welcome ";
+    $msg .= $_SESSION['name'];
+    $msg .= "</p>";
+
+    return [$msg,''];
 }
 
 ?>
