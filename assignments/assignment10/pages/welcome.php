@@ -1,7 +1,17 @@
 <?php
 
-require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/pages/routes.php');
-$sec = security();
+    session_start();
+    if($_SESSION['access'] == "accessGranted"){
+        if ($_SESSION['status'] == "admin"){ 
+            $nav = $adminNav;
+        }
+        elseif ($_SESSION['status'] == "staff"){ 
+            $nav = $staffNav;
+        }
+    }
+    else {
+        header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+    }
 
 
 
