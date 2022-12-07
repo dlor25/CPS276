@@ -3,11 +3,11 @@
 $path = "index.php?page=login";
 $cwd = "/home/d/l/dlor/public_html/CPS276/assignments/assignment10/";
 
-$nav="";
+$nav = "";
 
 
 
-$staffNav=<<<HTML
+$staffNav = <<<HTML
     <nav>
         <ul class = "nav justify-content">
             <li class = "nav-item"><a class="nav-link" href="index.php?page=addContact">Add Contact</a></li>
@@ -19,7 +19,7 @@ HTML;
 
 
 
-$adminNav=<<<HTML
+$adminNav = <<<HTML
     <nav>
         <ul class = "nav justify-content">
             <li class = "nav-item"><a class="nav-link" href="index.php?page=addContact">Add Contact</a></li>
