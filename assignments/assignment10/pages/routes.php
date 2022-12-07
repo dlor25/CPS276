@@ -3,8 +3,23 @@
 $path = "index.php?page=login";
 $cwd = "/home/d/l/dlor/public_html/CPS276/assignments/assignment10/";
 
+$nav="";
 
-$nav=<<<HTML
+
+
+$staffNav=<<<HTML
+    <nav>
+        <ul class = "nav justify-content">
+            <li class = "nav-item"><a class="nav-link" href="index.php?page=addContact">Add Contact</a></li>
+            <li class = "nav-item"><a class="nav-link" href="index.php?page=deleteContacts">Delete Contact(s)</a></li>
+            <li class = "nav-item"><a class="nav-link" href="index.php?page=logout">Logout</a></li>
+        </ul>
+    </nav>
+HTML;
+
+
+
+$adminNav=<<<HTML
     <nav>
         <ul class = "nav justify-content">
             <li class = "nav-item"><a class="nav-link" href="index.php?page=addContact">Add Contact</a></li>
@@ -15,6 +30,19 @@ $nav=<<<HTML
         </ul>
     </nav>
 HTML;
+
+function security(){
+    global $nav, $adminNav, $staffNav;
+    session_start();
+    if($_SESSION['accessGranted'] == "granted"){
+        if ($_SESSION['status'] == "admin"){ 
+            $nav = $adminNav;
+        }
+    }
+    else {
+        header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+    }
+}
 
 if(isset($_GET)){
     if($_GET['page'] === "addContact"){

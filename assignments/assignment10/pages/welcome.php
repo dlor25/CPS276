@@ -3,7 +3,7 @@
 
 session_start();
 if($_SESSION['access'] !== "accessGranted"){
-  header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
+  header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login');
 }
 
 

@@ -1,10 +1,8 @@
 <?php
 
-require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
-
 function init(){
 
-  if(isset($_POST['login'])){
+  if(isset($_POST['sumbit'])){
 
     return login($_POST);
   }
@@ -26,7 +24,7 @@ function init(){
   
       <p>Email is "dlor@admin.com" password is "password"</p>
 
-      <form action="index.php?page=login.php" method="post">
+      <form action="index.php?page=login" method="post">
 
       <div class="form-group">
         <label>Email: <input type="text" name="email" class="form-control" value="dlor@admin.com"></label>
@@ -37,7 +35,7 @@ function init(){
       </div>
       
       <div class="from-group">
-        <input type="submit" name="login" value="Login" class="btn btn-primary">
+        <input type="submit" name="sumbit" value="Login" class="btn btn-primary">
       </div>
 
       </form> 
@@ -51,7 +49,9 @@ function init(){
 
 
   function login($post){
-         
+  
+  require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
+  
   $pdo = new PdoMethods();
   $sql = "SELECT email, password FROM admins WHERE email = :email";
   $bindings = array(
@@ -73,11 +73,31 @@ function init(){
       if(password_verify($post['password'], $records[0]['password'])){
 
         session_start();
-        $_SESSION['access'] = "accessGranted";
 
-        $msg = header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
+          $pdo = new PdoMethods();
 
-        return $msg;
+          $sql = "SELECT status, name FROM admins WHERE $record[0]['password']";
+
+          if($row['status'] === "admin"){
+            
+            $_SESSION['status'] = "admin";
+
+            $msg = header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
+
+            return $msg;
+          }
+          elseif($row['status'] === "staff"){
+
+            $_SESSION['status'] = "staff";
+
+            $msg = header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
+          
+            return $msg;
+          }
+          else{
+            $msg = "error";
+            return $msg;
+          }
       }
 
       else {

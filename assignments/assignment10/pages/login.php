@@ -2,7 +2,7 @@
 
 function init(){
 
-  if(isset($_POST['sumbit'])){
+  if(isset($_POST['login'])){
 
     return login($_POST);
   }
@@ -35,7 +35,7 @@ function init(){
       </div>
       
       <div class="from-group">
-        <input type="submit" name="sumbit" value="Login" class="btn btn-primary">
+        <input type="submit" name="login" value="Login" class="btn btn-primary">
       </div>
 
       </form> 
@@ -53,7 +53,7 @@ function init(){
   require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
   
   $pdo = new PdoMethods();
-  $sql = "SELECT email, password FROM admins WHERE email = :email";
+  $sql = "SELECT email, password, name, status FROM admins WHERE email = :email";
   $bindings = array(
   array(':email', $post['email'], 'str')
   );
@@ -74,6 +74,8 @@ function init(){
 
         session_start();
         $_SESSION['access'] = "accessGranted";
+        $_SESSION['status'] = $records[0]['status'];
+        $_SESSION['name'] = $records[0]['name'];
 
         $msg = header('Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=welcome');
 
