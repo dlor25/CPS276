@@ -18,8 +18,6 @@ function init(){
   
    $output = <<<HTML
   
-      <h1>Login</h1>
-  
       <!-- <p>Email is "dlor@admin.com" password is "password"</p> -->
       <!-- Staff email is "dlor@staff.com" password is "password"
            Test email is "test@test.com password is "test"     
@@ -33,7 +31,7 @@ function init(){
       </div>
 
       <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" value="password">
       </div>  
       
@@ -93,6 +91,7 @@ function init(){
     }
     else {
 
+      //email cannot be blank
       $msg = "Login credentials incorrect";
 
       return getLoginForm($msg);
@@ -103,3 +102,4 @@ function init(){
 
   return getLoginForm($msg);
   }
+

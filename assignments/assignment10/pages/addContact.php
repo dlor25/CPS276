@@ -180,8 +180,6 @@ $options = $stickyForm->createOptions($elementsArr['state']);
 /* THIS IS A HEREDOC STRING WHICH CREATES THE FORM AND ADD THE APPROPRIATE VALUES AND ERROR MESSAGES */
 $form = <<<HTML
 
-    <h1>Add Contact</h1>
-
     <form method="post" action="index.php?page=addContact">
     <div class="form-group">
       <label for="name">Name (letters only){$elementsArr['name']['errorOutput']}</label>

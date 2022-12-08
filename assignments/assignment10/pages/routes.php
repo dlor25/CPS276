@@ -4,7 +4,7 @@ $path = "index.php?page=login";
 $cwd = "/home/d/l/dlor/public_html/CPS276/assignments/assignment10/";
 
 $nav = "";
-
+$head = "";
 
 
 $staffNav = <<<HTML
@@ -51,23 +51,25 @@ if(isset($_GET)){
     if($_GET['page'] === "addContact"){
         require_once($cwd.'pages/addContact.php');
         $result = init();
+        $head = "<h1>Add Contact</h1>";
     }
     
     else if($_GET['page'] === "deleteContacts"){
         require_once($cwd.'pages/deleteContacts.php');
         $result = init();
+        $head = "<h1>Delete Contact(s)</h1>";
     }
 
     else if($_GET['page'] === "addAdmin"){
         require_once($cwd.'pages/addAdmin.php');
         $result = init();
-
+        $head = "<h1>Add Admin</h1>";
     }
 
     else if($_GET['page'] === "deleteAdmins"){
         require_once($cwd.'pages/deleteAdmins.php');
         $result = init();
-
+        $head = "<h1>Delete Admin(s)</h1>";
     }
 
     else if($_GET['page'] === "logout"){
@@ -78,12 +80,12 @@ if(isset($_GET)){
     else if($_GET['page'] === "login"){
         require_once($cwd.'pages/login.php');
         $result = init();
+        $head = "<h1>Login</h1>";
     }
 
     else if($_GET['page'] === "welcome"){
         require_once($cwd.'pages/welcome.php');
         $result = init();
-
     }
 
 

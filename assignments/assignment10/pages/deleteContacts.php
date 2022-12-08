@@ -49,14 +49,8 @@ function init(){
 
     $records = $pdo->selectNotBinded($sql);
 
-    $output = <<<HTML
-    
-    <h1>Delete Contact(s)</h1>
-
-    HTML;
-
     if(count($records) === 0){
-        $output .= "<p>There are no records to display</p>";
+        $output = "<p>There are no records to display</p>";
         return [$output,""];
     }
     else {

@@ -15,10 +15,14 @@ require_once('pages/routes.php');
 	</head>
 
 	<body class="container">
+		
 		<?php
+
 			/* THIS IS THE PHP PAGE  */
 			echo $nav;
 			
+			echo $head;
+
 			/* THE ACKNOWLEDGEMENT GOES HERE AS THE FIRST INDEX OF THE ARRAY  */
 			echo $result[0]; 
 

@@ -68,12 +68,11 @@ $elementsArr = [
 		"regex"=>"email"
   ],
   "password"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one financial option</span>",
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must enter a password</span>",
     "errorOutput"=>"",
     "type"=>"password",
     "value"=>"password",
-    "action"=>"required",
-    "regex"=>"password"
+    "regex"=>"name"
   ],
   "status"=>[
     "type"=>"select",
@@ -87,44 +86,54 @@ $elementsArr = [
 /*THIS FUNCTION CAN BE CALLED TO ADD DATA TO THE DATABASE */
 function addData($post){
   global $elementsArr;  
-  /* IF EVERYTHING WORKS ADD THE DATA HERE TO THE DATABASE HERE USING THE $_POST SUPER GLOBAL ARRAY */
-      //print_r($_POST);
-      require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
+/* IF EVERYTHING WORKS ADD THE DATA HERE TO THE DATABASE HERE USING THE $_POST SUPER GLOBAL ARRAY */
+  //print_r($_POST);
+  require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
 
-      $pdo = new PdoMethods();
+  $pdo = new PdoMethods();
+
+  $sql = "SELECT email FROM admins WHERE email = :email";
+  $bindings = array(
+  array(':email', $post['email'], 'str')
+  );
+
+  $records = $pdo->selectBinded($sql, $bindings);
+
+  if($records == "error"){
+    return getForm("<p>There was a problem processing your form</p>", $elementsArr);
+  }
+
+  else{
+    if(count($records) != 0){
+      return getForm("<p>That email already exists</p>", $elementsArr);
+    }
+
+    else{
+      $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
 
       $hpw = password_hash($post['password'],PASSWORD_DEFAULT);
 
-      $sql = "SELECT email FROM admins WHERE email = :email";
-      $bindings = array(
-      array(':email', $post['email'], 'str')
-      );
+      $bindings = [
+        [':name',$post['name'],'str'],
+        [':email',$post['email'],'str'],
+        [':hpw',$hpw,'str'],
+        [':status',$post['status'],'str'],
+        ];
 
-      $records = $pdo->selectBinded($sql, $bindings);
+      $result = $pdo->otherBinded($sql, $bindings);
 
-      if($post['email'] != $records[0]['email']){
-        $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
-
-        $bindings = [
-          [':name',$post['name'],'str'],
-          [':email',$post['email'],'str'],
-          [':hpw',$hpw,'str'],
-          [':status',$post['status'],'str'],
-          ];
-
-        $result = $pdo->otherBinded($sql, $bindings);
-
-        if($result == "error"){
-          return getForm("<p>There was a problem processing your form</p>", $elementsArr);
-        }
-        else {
-          return getForm("<p>Admin has been added</p>", $elementsArr);
-        }
+      if($result = 'noerror'){
+        return getForm("<p>Admin has been added</p>", $elementsArr);
       }
+
       else{
-        return getForm("<p>That email already exists</p>", $elementsArr);
+        return getForm("<p>There was a problem adding this administrator</p>", $elementsArr);
       }
+
+    }
+  }
 }
+
    
 
 /*THIS IS THEGET FROM FUCTION WHICH WILL BUILD THE FORM BASED UPON UPON THE (UNMODIFIED OF MODIFIED) ELEMENTS ARRAY. */
@@ -136,8 +145,6 @@ $options = $stickyForm->createOptions($elementsArr['status']);
 /* THIS IS A HEREDOC STRING WHICH CREATES THE FORM AND ADD THE APPROPRIATE VALUES AND ERROR MESSAGES */
 $form = <<<HTML
 
-    <h1>Add Admin</h1>
-
     <form method="post" action="index.php?page=addAdmin">
     <div class="form-group">
       <label for="name">Name (letters only){$elementsArr['name']['errorOutput']}</label>
@@ -148,7 +155,7 @@ $form = <<<HTML
       <input type="text" class="form-control" id="email" name="email" value="{$elementsArr['email']['value']}" >
     </div>
     <div class="form-group">
-      <label for="password">Password {$elementsArr['email']['errorOutput']}</label>
+      <label for="password">Password {$elementsArr['password']['errorOutput']}</label>
       <input type="password" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}" >
     </div>  
     <div class="form-group">
@@ -167,7 +174,5 @@ HTML;
 return [$acknowledgement, $form];
 
 }
-
-// Can't be the same email
 
 ?>

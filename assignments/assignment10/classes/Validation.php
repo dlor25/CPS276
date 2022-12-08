@@ -41,6 +41,11 @@ class Validation{
         return $this->setError($match);
     }
 
+	private function password($value){
+		$match = preg_match('/^[a-z]{1,50}$/i', $value);
+		return $this->setError($match);
+	}
+
 	private function dob($value){
         $match = preg_match('/^(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)[0-9]{2}$/', $value);
         return $this->setError($match);
