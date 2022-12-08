@@ -3,14 +3,44 @@
 function init(){
 
   if(isset($_POST['login'])){
-
+    require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/StickyForm.php');
+    $stickyForm = new StickyForm();
+    
+      global $elementsArr, $stickyForm;
+    
+        /*THIS METHODS TAKE THE POST ARRAY AND THE ELEMENTS ARRAY (SEE BELOW) AND PASSES THEM TO THE VALIDATION FORM METHOD OF THE STICKY FORM CLASS.  IT UPDATES THE ELEMENTS ARRAY AND RETURNS IT, THIS IS STORED IN THE $postArr VARIABLE */
+        $postArr = $stickyForm->validateForm($_POST, $elementsArr);
+    
+        /* THE ELEMENTS ARRAY HAS A MASTER STATUS AREA. IF THERE ARE ANY ERRORS FOUND THE STATUS IS CHANGED TO "ERRORS" FROM THE DEFAULT OF "NOERRORS".  DEPENDING ON WHAT IS RETURNED DEPENDS ON WHAT HAPPENS NEXT.  IN THIS CASE THE RETURN MESSAGE HAS "NO ERRORS" SO WE HAVE NO PROBLEMS WITH OUR VALIDATION AND WE CAN SUBMIT THE FORM */
+        if($postArr['masterStatus']['status'] == "noerrors"){
+          
+          return login($_POST);
+    
+        }
+        else{
+          return getLoginForm("",$postArr);
+        }
+  }
+        
+      else {
+          return getLoginForm("", $elementsArr);
+        } 
+    
+    /* THIS IS THE DATA OF THE FORM.  IT IS A MULTI-DIMENTIONAL ASSOCIATIVE ARRAY THAT IS USED TO CONTAIN FORM DATA AND ERROR MESSAGES.   EACH SUB ARRAY IS NAMED BASED UPON WHAT FORM FIELD IT IS ATTACHED TO. FOR EXAMPLE, "NAME" GOES TO THE TEXT FIELDS WITH THE NAME ATTRIBUTE THAT HAS THE VALUE OF "NAME". NOTICE THE TYPE IS "TEXT" FOR TEXT FIELD.  DEPENDING ON WHAT HAPPENS THIS ASSOCIATE ARRAY IS UPDATED.*/
+    $elementsArr = [
+      "masterStatus"=>[
+        "status"=>"noerrors",
+        "type"=>"masterStatus"
+      ],
+      "email"=>[
+        "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a valid email</span>",
+        "errorOutput"=>"",
+        "type"=>"text",
+        "value"=>"dlor@admin.com",
+        "regex"=>"email"
+      ],
+    ];
     return login($_POST);
-  }
-  
-  else {
-    $msg = "";
-    return getLoginForm($msg);
-  }
 }
 
 
@@ -26,8 +56,8 @@ function init(){
       <form action="index.php?page=login" method="post">
 
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" name="email" value="dlor@admin.com">
+        <label for="email">Email {$elementsArr['email']['errorOutput']}</label>
+        <input type="text" class="form-control" id="email" name="email" value="{$elementsArr['email']['value']}">
       </div>
 
       <div class="form-group">
