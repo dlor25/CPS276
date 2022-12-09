@@ -2,10 +2,10 @@
 
 session_start();
 if($_SESSION['access'] == "accessGranted"){
-    if ($_SESSION['status'] == "admin"){ 
+    if ($_SESSION['status'] == "admin"){
         $nav = $adminNav;
     }
-    elseif ($_SESSION['status'] == "staff"){ 
+    elseif ($_SESSION['status'] == "staff"){
       header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
     }
 }
@@ -29,7 +29,7 @@ function init(){
 
     /* THE ELEMENTS ARRAY HAS A MASTER STATUS AREA. IF THERE ARE ANY ERRORS FOUND THE STATUS IS CHANGED TO "ERRORS" FROM THE DEFAULT OF "NOERRORS".  DEPENDING ON WHAT IS RETURNED DEPENDS ON WHAT HAPPENS NEXT.  IN THIS CASE THE RETURN MESSAGE HAS "NO ERRORS" SO WE HAVE NO PROBLEMS WITH OUR VALIDATION AND WE CAN SUBMIT THE FORM */
     if($postArr['masterStatus']['status'] == "noerrors"){
-      
+
       /*addData() IS THE METHOD TO CALL TO ADD THE FORM INFORMATION TO THE DATABASE (NOT WRITTEN IN THIS EXAMPLE) THEN WE CALL THE GETFORM METHOD WHICH RETURNS AND ACKNOWLEDGEMENT AND THE ORGINAL ARRAY (NOT MODIFIED). THE ACKNOWLEDGEMENT IS THE FIRST PARAMETER THE ELEMENTS ARRAY IS THE ELEMENTS ARRAY WE CREATE (AGAIN SEE BELOW) */
       return addData($_POST);
 
@@ -38,13 +38,13 @@ function init(){
       /* IF THERE WAS A PROBLEM WITH THE FORM VALIDATION THEN THE MODIFIED ARRAY ($postArr) WILL BE SENT AS THE SECOND PARAMETER.  THIS MODIFIED ARRAY IS THE SAME AS THE ELEMENTS ARRAY BUT ERROR MESSAGES AND VALUES HAVE BEEN ADDED TO DISPLAY ERRORS AND MAKE IT STICKY */
       return getForm("",$postArr);
     }
-    
+
   }
 
   /* THIS CREATES THE FORM BASED ON THE ORIGINAL ARRAY THIS IS CALLED WHEN THE PAGE FIRST LOADS BEFORE A FORM HAS BEEN SUBMITTED */
   else {
       return getForm("", $elementsArr);
-    } 
+    }
 }
 
 /* THIS IS THE DATA OF THE FORM.  IT IS A MULTI-DIMENTIONAL ASSOCIATIVE ARRAY THAT IS USED TO CONTAIN FORM DATA AND ERROR MESSAGES.   EACH SUB ARRAY IS NAMED BASED UPON WHAT FORM FIELD IT IS ATTACHED TO. FOR EXAMPLE, "NAME" GOES TO THE TEXT FIELDS WITH THE NAME ATTRIBUTE THAT HAS THE VALUE OF "NAME". NOTICE THE TYPE IS "TEXT" FOR TEXT FIELD.  DEPENDING ON WHAT HAPPENS THIS ASSOCIATE ARRAY IS UPDATED.*/
@@ -53,39 +53,42 @@ $elementsArr = [
     "status"=>"noerrors",
     "type"=>"masterStatus"
   ],
-	"name"=>[
-	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Name cannot be blank and must be a standard name</span>",
+        "name"=>[
+          "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Name cannot be blank and must be a standard name</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"Scott Shaper",
-		"regex"=>"name"
-	],
-	"email"=>[
-		"errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a valid email</span>",
+                "regex"=>"name"
+        ],
+        "email"=>[
+                "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a valid email</span>",
     "errorOutput"=>"",
     "type"=>"text",
-		"value"=>"sshaper@admin.com",
-		"regex"=>"email"
+                "value"=>"sshaper@admin.com",
+                "regex"=>"email"
   ],
   "password"=>[
     "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must enter a password</span>",
     "errorOutput"=>"",
-    "type"=>"password",
+    "type"=>"text",//IT IS NOT TYPE EQUALS PASSWORD BUT TYPE EQUALS TEXT
     "value"=>"password",
     "regex"=>"name"
   ],
   "status"=>[
     "type"=>"select",
     "options"=>["staff"=>"Staff","admin"=>"Admin"],
-		"selected"=>"staff",
-		"regex"=>"name"
-	],
+                "selected"=>"staff",
+                "regex"=>"name"
+        ],
 ];
 
 
 /*THIS FUNCTION CAN BE CALLED TO ADD DATA TO THE DATABASE */
 function addData($post){
-  global $elementsArr;  
+  global $elementsArr;
+
+
+
 /* IF EVERYTHING WORKS ADD THE DATA HERE TO THE DATABASE HERE USING THE $_POST SUPER GLOBAL ARRAY */
   //print_r($_POST);
   require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
@@ -107,9 +110,9 @@ function addData($post){
     if(count($records) != 0){
       return getForm("<p>That email already exists</p>", $elementsArr);
     }
-    
+
     else{
-     
+
       if($post['password'] == ""){
         return getForm("", $elementsArr);
       }
@@ -142,10 +145,14 @@ function addData($post){
   }
 }
 
-   
+
 
 /*THIS IS THEGET FROM FUCTION WHICH WILL BUILD THE FORM BASED UPON UPON THE (UNMODIFIED OF MODIFIED) ELEMENTS ARRAY. */
 function getForm($acknowledgement, $elementsArr){
+
+
+
+
 
 global $stickyForm;
 $options = $stickyForm->createOptions($elementsArr['status']);
@@ -165,7 +172,7 @@ $form = <<<HTML
     <div class="form-group">
       <label for="password">Password {$elementsArr['password']['errorOutput']}</label>
       <input type="password" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}" >
-    </div>  
+    </div>
     <div class="form-group">
       <label for="state">Status</label>
       <select class="form-control" id="status" name="status">

@@ -1,56 +1,63 @@
 <?php
 
-function init(){
-
-  if(isset($_POST['login'])){
-    require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/StickyForm.php');
-    $stickyForm = new StickyForm();
-    
-      global $elementsArr, $stickyForm;
-    
-        /*THIS METHODS TAKE THE POST ARRAY AND THE ELEMENTS ARRAY (SEE BELOW) AND PASSES THEM TO THE VALIDATION FORM METHOD OF THE STICKY FORM CLASS.  IT UPDATES THE ELEMENTS ARRAY AND RETURNS IT, THIS IS STORED IN THE $postArr VARIABLE */
-        $postArr = $stickyForm->validateForm($_POST, $elementsArr);
-    
-        /* THE ELEMENTS ARRAY HAS A MASTER STATUS AREA. IF THERE ARE ANY ERRORS FOUND THE STATUS IS CHANGED TO "ERRORS" FROM THE DEFAULT OF "NOERRORS".  DEPENDING ON WHAT IS RETURNED DEPENDS ON WHAT HAPPENS NEXT.  IN THIS CASE THE RETURN MESSAGE HAS "NO ERRORS" SO WE HAVE NO PROBLEMS WITH OUR VALIDATION AND WE CAN SUBMIT THE FORM */
-        if($postArr['masterStatus']['status'] == "noerrors"){
-          
-          return login($_POST);
-    
-        }
-        else{
-          return getLoginForm("",$postArr);
-        }
-  }
-        
-      else {
-          return getLoginForm("", $elementsArr);
-        } 
-    
-    /* THIS IS THE DATA OF THE FORM.  IT IS A MULTI-DIMENTIONAL ASSOCIATIVE ARRAY THAT IS USED TO CONTAIN FORM DATA AND ERROR MESSAGES.   EACH SUB ARRAY IS NAMED BASED UPON WHAT FORM FIELD IT IS ATTACHED TO. FOR EXAMPLE, "NAME" GOES TO THE TEXT FIELDS WITH THE NAME ATTRIBUTE THAT HAS THE VALUE OF "NAME". NOTICE THE TYPE IS "TEXT" FOR TEXT FIELD.  DEPENDING ON WHAT HAPPENS THIS ASSOCIATE ARRAY IS UPDATED.*/
     $elementsArr = [
       "masterStatus"=>[
         "status"=>"noerrors",
         "type"=>"masterStatus"
       ],
       "email"=>[
-        "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a valid email</span>",
+        "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a val
+id email</span>",
         "errorOutput"=>"",
         "type"=>"text",
         "value"=>"dlor@admin.com",
         "regex"=>"email"
-      ],
+      ]
     ];
+
+
+
+function init(){
+
+global $elementsArr, $stickForm;
+
+  if(isset($_POST['login'])){
+    require_once('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/StickyForm.php');
+    $stickyForm = new StickyForm();
+
+      //global $elementsArr, $stickyForm;
+
+        /*THIS METHODS TAKE THE POST ARRAY AND THE ELEMENTS ARRAY (SEE BELOW) AND PASSES THEM TO THE VALIDATION FORM METHOD OF THE STICKY FORM CLASS.  IT UPDATES THE ELEMENTS ARRAY AND RETURNS IT, THIS IS STORED IN THE $postArr VARIABLE */
+        $postArr = $stickyForm->validateForm($_POST, $elementsArr);
+
+        /* THE ELEMENTS ARRAY HAS A MASTER STATUS AREA. IF THERE ARE ANY ERRORS FOUND THE STATUS IS CHANGED TO "ERRORS" FROM THE DEFAULT OF "NOERRORS".  DEPENDING ON WHAT IS RETURNED DEPENDS ON WHAT HAPPENS NEXT.  IN THIS CASE THE RETURN MESSAGE HAS "NO ERRORS" SO WE HAVE NO PROBLEMS WITH OUR VALIDATION AND WE CAN SUBMIT THE FORM */
+        if($postArr['masterStatus']['status'] == "noerrors"){
+
+          return login($_POST);
+
+        }
+        else{
+          return getLoginForm("",$postArr);
+        }
+  }
+
+      else {
+          return getLoginForm("", $elementsArr);
+        }
+
     return login($_POST);
 }
 
 
-  function getLoginForm($error){
-  
+  function getLoginForm($acknowledgement, $elementsArr){
+
+//global $elementsArr;
+
    $output = <<<HTML
-  
+
       <!-- <p>Email is "dlor@admin.com" password is "password"</p> -->
       <!-- Staff email is "dlor@staff.com" password is "password"
-           Test email is "test@test.com password is "test"     
+           Test email is "test@test.com password is "test"
       -->
 
       <form action="index.php?page=login" method="post">
@@ -63,25 +70,25 @@ function init(){
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" value="password">
-      </div>  
-      
+      </div>
+
       <div class="from-group">
         <input type="submit" name="login" value="Login" class="btn btn-primary">
       </div>
 
-      </form> 
+      </form>
   HTML;
 
-  return [$error, $output];
+  return [$acknowledgement, $output];
 
   }
 
 
 
   function login($post){
-  
+
   require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
-  
+
   $pdo = new PdoMethods();
   $sql = "SELECT email, password, name, status FROM admins WHERE email = :email";
   $bindings = array(
@@ -113,7 +120,7 @@ function init(){
       }
 
       else {
-              
+
         $msg = "Login credentials incorrect";
 
         return getLoginForm($msg);
@@ -132,4 +139,3 @@ function init(){
 
   return getLoginForm($msg);
   }
-
