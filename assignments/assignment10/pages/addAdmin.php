@@ -53,19 +53,19 @@ $elementsArr = [
     "status"=>"noerrors",
     "type"=>"masterStatus"
   ],
-        "name"=>[
-          "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Name cannot be blank and must be a standard name</span>",
+  "name"=>[
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Name cannot be blank and must be a standard name</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"Scott Shaper",
-                "regex"=>"name"
-        ],
-        "email"=>[
-                "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a valid email</span>",
+    "regex"=>"name"
+  ],
+  "email"=>[
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be written as a proper email</span>",
     "errorOutput"=>"",
     "type"=>"text",
-                "value"=>"sshaper@admin.com",
-                "regex"=>"email"
+    "value"=>"sshaper@admin.com",
+    "regex"=>"email"
   ],
   "password"=>[
     "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must enter a password</span>",
@@ -77,9 +77,9 @@ $elementsArr = [
   "status"=>[
     "type"=>"select",
     "options"=>["staff"=>"Staff","admin"=>"Admin"],
-                "selected"=>"staff",
-                "regex"=>"name"
-        ],
+    "selected"=>"staff",
+    "regex"=>"name"
+  ],
 ];
 
 
@@ -113,33 +113,25 @@ function addData($post){
 
     else{
 
-      if($post['password'] == ""){
-        return getForm("", $elementsArr);
+      $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
+
+      $hpw = password_hash($post['password'],PASSWORD_DEFAULT);
+
+      $bindings = [
+        [':name',$post['name'],'str'],
+        [':email',$post['email'],'str'],
+        [':hpw',$hpw,'str'],
+        [':status',$post['status'],'str'],
+        ];
+
+      $result = $pdo->otherBinded($sql, $bindings);
+
+      if($result = 'noerror'){
+        return getForm("<p>Admin has been added</p>", $elementsArr);
       }
 
       else{
-
-        $sql = "INSERT INTO admins (name, email, password, status) VALUES (:name, :email, :hpw, :status)";
-
-        $hpw = password_hash($post['password'],PASSWORD_DEFAULT);
-
-        $bindings = [
-          [':name',$post['name'],'str'],
-          [':email',$post['email'],'str'],
-          [':hpw',$hpw,'str'],
-          [':status',$post['status'],'str'],
-          ];
-
-        $result = $pdo->otherBinded($sql, $bindings);
-
-        if($result = 'noerror'){
-          return getForm("<p>Admin has been added</p>", $elementsArr);
-        }
-
-        else{
-          return getForm("<p>There was a problem adding this administrator</p>", $elementsArr);
-        }
-
+        return getForm("<p>There was a problem adding this administrator</p>", $elementsArr);
       }
     }
   }

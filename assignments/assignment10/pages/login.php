@@ -6,8 +6,7 @@
         "type"=>"masterStatus"
       ],
       "email"=>[
-        "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be a val
-id email</span>",
+        "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email cannot be blank and must be written as a proper email</span>",
         "errorOutput"=>"",
         "type"=>"text",
         "value"=>"dlor@admin.com",

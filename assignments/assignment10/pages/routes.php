@@ -86,6 +86,7 @@ if(isset($_GET)){
     else if($_GET['page'] === "welcome"){
         require_once($cwd.'pages/welcome.php');
         $result = init();
+        $head = "<h1>Welcome</h1>";
     }
 
 

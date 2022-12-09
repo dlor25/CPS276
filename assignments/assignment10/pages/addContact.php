@@ -61,14 +61,14 @@ $elementsArr = [
 		"regex"=>"name"
 	],
 	"address"=>[
-	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Address cannot be blank and must be a standard address</span>",
+	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Address cannot be blank and must be a valid address</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"123 Someplace",
 		"regex"=>"address"
 	],
   "city"=>[
-	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>City cannot be blank and must be a standard city</span>",
+	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>City cannot be blank and must be a valid city</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"Anywhere",
@@ -81,21 +81,21 @@ $elementsArr = [
 		"regex"=>"name"
 	],
 	"phone"=>[
-		"errorMessage"=>"<span style='color: red; margin-left: 15px;'>Phone number cannot be blank and must be valid</span>",
+		"errorMessage"=>"<span style='color: red; margin-left: 15px;'>Phone number cannot be blank and must be written as 999.999.9999</span>",
     "errorOutput"=>"",
     "type"=>"text",
 		"value"=>"999.999.9999",
 		"regex"=>"phone"
   ],
 	"email"=>[
-		"errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email address cannot be blank and must be valid</span>",
+		"errorMessage"=>"<span style='color: red; margin-left: 15px;'>Email address cannot be blank and must be written as a proper email</span>",
     "errorOutput"=>"",
     "type"=>"text",
 		"value"=>"sshaper@test.com",
 		"regex"=>"email"
   ],
 	"dob"=>[
-	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>DOB cannot be blank and must be a valid date.</span>",
+	  "errorMessage"=>"<span style='color: red; margin-left: 15px;'>DOB cannot be blank, must be a valid date, and be formatted as mm/dd/yyyy.</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"12/25/1999",

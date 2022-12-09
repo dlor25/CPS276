@@ -17,9 +17,7 @@
 
 function init(){
 
-    $msg = "<h1>Welcome</h1>";
-
-    $msg .= "<p>Welcome ";
+    $msg = "<p>Welcome ";
     $msg .= $_SESSION['name'];
     $msg .= "</p>";
 
