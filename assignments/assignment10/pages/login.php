@@ -11,7 +11,14 @@
         "type"=>"text",
         "value"=>"dlor@admin.com",
         "regex"=>"email"
-      ]
+      ],
+      "password"=>[
+        "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Password cannot be blank</span>",
+        "errorOutput"=>"",
+        "type"=>"text",
+        "value"=>"password",
+        "regex"=>"name"
+      ],
     ];
 
 
@@ -67,8 +74,8 @@ global $elementsArr, $stickForm;
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" value="password">
+        <label for="password">Password {$elementsArr['password']['errorOutput']}</label>
+        <input type="password" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}">
       </div>
 
       <div class="from-group">
