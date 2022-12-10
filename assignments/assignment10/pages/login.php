@@ -134,7 +134,6 @@ global $elementsArr, $stickForm;
     }
     else {
 
-      //email cannot be blank
       $msg = "Login credentials incorrect";
 
       return getLoginForm($msg);
