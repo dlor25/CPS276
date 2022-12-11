@@ -10,7 +10,7 @@ if($_SESSION['access'] == "accessGranted"){
     }
 }
 else {
-    header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+    header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=logout");
 }
 
 function init(){

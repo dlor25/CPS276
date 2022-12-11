@@ -6,11 +6,11 @@ if($_SESSION['access'] == "accessGranted"){
         $nav = $adminNav;
     }
     elseif ($_SESSION['status'] == "staff"){ 
-        header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+        header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=logout");
     }
 }
 else {
-    header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=login");
+    header("Location:https://russet-v8.wccnet.edu/~dlor/CPS276/assignments/assignment10/index.php?page=logout");
 }
 
 function init(){
