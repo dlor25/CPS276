@@ -31,7 +31,7 @@ CREATE TABLE `contacts` (
   `phone` varchar(12) NOT NULL DEFAULT '',
   `email` varchar(250) NOT NULL DEFAULT '',
   `dob` varchar(10) NOT NULL DEFAULT '',
-  `contactType` varchar(250) NULL DEFAULT'No contact options selected',
+  `contactType` varchar(250) NULL DEFAULT 'No contact options selected',
   `age` varchar(5) NOT NULL DEFAULT '',
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
