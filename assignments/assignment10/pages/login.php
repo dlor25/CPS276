@@ -92,7 +92,7 @@ global $elementsArr, $stickForm;
 
 
   function login($post){
-
+  global $elementsArr;
   require_once ('/home/d/l/dlor/public_html/CPS276/assignments/assignment10/classes/Pdo_methods.php');
 
   $pdo = new PdoMethods();
@@ -106,7 +106,7 @@ global $elementsArr, $stickForm;
   /** IF THERE WAS AN RETURN ERROR STRING */
   if($records == 'error'){
     $msg = "There was an error logging it";
-    return getLoginForm($msg);
+    return getLoginForm($msg, $elementsArr);
   }
 
   /** */
@@ -129,18 +129,18 @@ global $elementsArr, $stickForm;
 
         $msg = "Login credentials incorrect";
 
-        return getLoginForm($msg);
+        return getLoginForm($msg, $elementsArr);
       }
     }
     else {
 
       $msg = "Login credentials incorrect";
 
-      return getLoginForm($msg);
+      return getLoginForm($msg, $elementsArr);
     }
   }
 
   $msg = "Login credentials incorrect";
 
-  return getLoginForm($msg);
+  return getLoginForm($msg, $elementsArr);
   }

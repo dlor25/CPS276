@@ -107,7 +107,7 @@ $elementsArr = [
     "status"=>["newsletter"=>"", "emailUpdates"=>"", "textUpdates"=>""]
   ],
   "age"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one age option</span>",
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select an age range</span>",
     "errorOutput"=>"",
     "type"=>"radio",
     "action"=>"required",
